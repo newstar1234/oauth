@@ -12,5 +12,4 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
 
 }
 
-// id가 존재하는지 확인할거임
-// entity - dto- service - repository
+
