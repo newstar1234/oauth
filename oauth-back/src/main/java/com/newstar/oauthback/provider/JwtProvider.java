@@ -13,7 +13,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtProvider {
 
-    private final String SECRET_KEY = "!234";
+    private final String SECRET_KEY = "!23456789";
 
     public String create(String id) {
 

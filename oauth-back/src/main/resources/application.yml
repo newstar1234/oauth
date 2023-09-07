@@ -12,8 +12,8 @@ spring:
         client:
           registration:
             github:
-              clientId: 5bba39d62b7e1816a4f3
-              clientSecret: 48c506fa989a21109ba45cfddf01b5ef85433b3b
+              clientId: c196fab610f4ab7cfc5b
+              clientSecret: 4f435a03713798a86466ba19ab81f5307e39b55a
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - user:email

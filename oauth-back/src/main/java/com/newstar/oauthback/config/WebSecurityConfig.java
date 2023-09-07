@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.newstar.oauthback.filter.JwtAuthenticationFilter;
+import com.newstar.oauthback.handler.OAuth2SuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ public class WebSecurityConfig {
     
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final DefaultOAuth2UserService oAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -30,11 +32,13 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/", "/auth/**", "/oauth2/**").permitAll()
+            .antMatchers("/", "/api/v1/auth/**", "/oauth2/**").permitAll()
             .anyRequest().authenticated().and()
             .oauth2Login()
             .redirectionEndpoint().baseUri("/oauth2/callback/*").and()
-            .userInfoEndpoint().userService(oAuth2UserService);
+            .authorizationEndpoint().baseUri("/api/v1/auth/social").and()
+            .userInfoEndpoint().userService(oAuth2UserService).and()
+            .successHandler(oAuth2SuccessHandler);
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
