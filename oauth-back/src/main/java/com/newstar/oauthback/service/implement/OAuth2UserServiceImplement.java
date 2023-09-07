@@ -39,7 +39,7 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
         if (!existedId) {
         UserEntity userEntity = new UserEntity(id, profileImage);
         userRepository.save(userEntity);
-    }
+        }
         
         return new ApplicationOAuth2User(id, oAuth2User.getAttributes());
 
